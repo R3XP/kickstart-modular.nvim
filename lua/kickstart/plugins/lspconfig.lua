@@ -128,28 +128,28 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
-              callback = function(event2)
-                vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
-              end,
-            })
-          end
+          -- if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+          --   local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+          --   vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+          --     buffer = event.buf,
+          --     group = highlight_augroup,
+          --     callback = vim.lsp.buf.document_highlight,
+          --   })
+          --
+          --   vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+          --     buffer = event.buf,
+          --     group = highlight_augroup,
+          --     callback = vim.lsp.buf.clear_references,
+          --   })
+          --
+          --   vim.api.nvim_create_autocmd('LspDetach', {
+          --     group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+          --     callback = function(event4)
+          --       vim.lsp.buf.clear_references()
+          --       vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event4.buf }
+          --     end,
+          --   })
+          -- end
 
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
@@ -179,7 +179,7 @@ return {
         } or {},
         virtual_text = {
           source = 'if_many',
-          spacing = 2,
+          spacing = 4,
           format = function(diagnostic)
             local diagnostic_message = {
               [vim.diagnostic.severity.ERROR] = diagnostic.message,
@@ -211,7 +211,15 @@ return {
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {
+          settings = {
+            ['rust-analyzer'] = {
+              cargo = { allFeatures = true, features = { 'all', 'server', 'web' } },
+              check = { features = { 'all', 'server', 'web' } },
+              procMacro = { enable = true },
+            },
+          },
+        },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -220,6 +228,71 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+
+        -- tailwindcss = {
+        --   settings = {
+        --     tailwindCSS = {
+        --       includeLanguages = { rust = 'html' },
+        --
+        --       experimental = {
+        --         classRegex = {
+        --           -- Erkenne z.B. `class: "..."` oder ähnliche Patterns in Rust-Makros
+        --           { 'class: "(.*)"' },
+        --         },
+        --       },
+        --     },
+        --   },
+        --   filetypes = {
+        --     'html',
+        --     'css',
+        --     'scss',
+        --     'javascript',
+        --     'javascriptreact',
+        --     'typescript',
+        --     'typescriptreact',
+        --     'svelte',
+        --     'rust', -- wichtig!
+        --   },
+        --   init_options = {
+        --     userLanguages = {
+        --       rust = 'html', -- behandelt rust wie html für Tailwind
+        --     },
+        --   },
+        -- },
+
+        -- tailwindcss = {
+        --   settings = { tailwindCSS = { filetypes = { 'rust', 'html' } } },
+        --   filetypes = { 'rust', 'html' },
+        -- },
+
+        -- tailwindcss = {
+        --   settings = {
+        --     tailwindCSS = {
+        --       experimental = {
+        --         classRegex = {
+        --           -- Matches: class: "w-16 bg-red-500"
+        --           { 'class: "(.*)"' },
+        --         },
+        --       },
+        --     },
+        --   },
+        --   filetypes = {
+        --     'html',
+        --     'css',
+        --     'scss',
+        --     'javascript',
+        --     'javascriptreact',
+        --     'typescript',
+        --     'typescriptreact',
+        --     'svelte',
+        --     'rust', -- wichtig!
+        --   },
+        --   init_options = {
+        --     userLanguages = {
+        --       rust = 'html', -- sagt dem Server, dass Rust wie HTML behandelt werden soll
+        --     },
+        --   },
+        -- },
 
         lua_ls = {
           -- cmd = { ... },
@@ -273,4 +346,4 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=4 sts=4 sw=4 et
