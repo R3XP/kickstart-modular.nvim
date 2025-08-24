@@ -8,6 +8,8 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
 
+vim.opt.diffopt = 'internal,filler,closeoff,algorithm:minimal,linematch:60,iwhiteall'
+
 -- kickstart:
 
 -- Make line numbers default

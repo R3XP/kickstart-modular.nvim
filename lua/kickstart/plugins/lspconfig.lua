@@ -5,6 +5,7 @@ return {
     -- used for completion, annotations and signatures of Neovim apis
     'folke/lazydev.nvim',
     ft = 'lua',
+    lazy = true,
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
@@ -211,15 +212,19 @@ return {
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        rust_analyzer = {
-          settings = {
-            ['rust-analyzer'] = {
-              cargo = { allFeatures = true, features = { 'all', 'server', 'web' } },
-              check = { features = { 'all', 'server', 'web' } },
-              procMacro = { enable = true },
-            },
-          },
-        },
+
+        -- NOTE: removed due to rustacean
+
+        -- rust_analyzer = {
+        --   settings = {
+        --     ['rust-analyzer'] = {
+        --       cargo = { allFeatures = true, features = { 'all', 'server', 'web' } },
+        --       check = { features = { 'all', 'server', 'web' } },
+        --       procMacro = { enable = true },
+        --     },
+        --   },
+        -- },
+
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:

@@ -4,6 +4,7 @@
 
 ]]
 --
+vim.keymap.set('n', '<C-Space>', require('blink.cmp').show)
 
 vim.keymap.set('n', '-', '<cmd>Oil<CR>')
 

@@ -59,7 +59,8 @@ return {
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
 
-        ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<C-K>'] = { 'show' },
+        -- ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-H>'] = { 'snippet_backward', 'fallback' },
         ['<C-L>'] = { 'snippet_forward', 'fallback' },
 
@@ -77,21 +78,32 @@ return {
         keyword = { range = 'full' },
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = true, auto_show_delay_ms = 500 },
+        documentation = {
+          auto_show = true,
+          -- auto_show_delay_ms = 500
+        },
 
         list = {
+          max_items = 50,
           selection = { auto_insert = false },
         },
 
         menu = {
           auto_show = true,
-          auto_show_delay_ms = 100,
+          -- auto_show_delay_ms = 100,
         },
 
         ghost_text = { enabled = true },
       },
 
-      cmdline = { completion = { menu = { auto_show = true, auto_show_delay_ms = 200 } } },
+      cmdline = {
+        completion = {
+          menu = {
+            auto_show = true,
+            -- auto_show_delay_ms = 200
+          },
+        },
+      },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
