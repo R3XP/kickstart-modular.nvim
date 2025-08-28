@@ -21,26 +21,26 @@ return {
       local aug = vim.api.nvim_create_augroup('LeapInclusiveOps', { clear = true })
       local initial = nil
 
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'LeapEnter',
-        group = aug,
-        callback = function()
-          initial = require('leap').opts.inclusive_motion
-          -- Detect operator-pending mode robustly:
-          -- 'o' is pure operator-pending; 'no'/'nov' etc. appear during mapped ops.
-          local mode = vim.api.nvim_get_mode().mode
-          local in_op = (mode == 'o') or mode:match '^no'
-          require('leap').opts.inclusive_motion = in_op and true or false
-        end,
-      })
-
-      vim.api.nvim_create_autocmd('User', {
-        pattern = 'LeapLeave',
-        group = aug,
-        callback = function()
-          require('leap').opts.inclusive_motion = initial
-        end,
-      })
+      -- vim.api.nvim_create_autocmd('User', {
+      --   pattern = 'LeapEnter',
+      --   group = aug,
+      --   callback = function()
+      --     initial = require('leap').opts.inclusive_motion
+      --     -- Detect operator-pending mode robustly:
+      --     -- 'o' is pure operator-pending; 'no'/'nov' etc. appear during mapped ops.
+      --     local mode = vim.api.nvim_get_mode().mode
+      --     local in_op = (mode == 'o') or mode:match '^no'
+      --     require('leap').opts.inclusive_motion = in_op and true or false
+      --   end,
+      -- })
+      --
+      -- vim.api.nvim_create_autocmd('User', {
+      --   pattern = 'LeapLeave',
+      --   group = aug,
+      --   callback = function()
+      --     require('leap').opts.inclusive_motion = initial
+      --   end,
+      -- })
     end,
   },
 }
