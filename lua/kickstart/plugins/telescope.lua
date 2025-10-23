@@ -28,6 +28,7 @@ return {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'jvgrootveld/telescope-zoxide' },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -65,6 +66,17 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          zoxide = {
+            prompt_title = '[ Zoxide directories ]',
+            mappings = {
+              default = {
+                action = function(selection)
+                  -- Open Oil buffer at the selected directory instead of changing cwd
+                  require('oil').open(selection.path)
+                end,
+              },
+            },
+          },
         },
       }
 
@@ -90,6 +102,7 @@ return {
       vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[S]earch [T]reesitter' })
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
       vim.keymap.set('n', '<leader>sC', builtin.commands, { desc = '[S]earch [C]ommand History' })
+      vim.keymap.set('n', '<leader>sz', require('telescope').extensions.zoxide.list, { desc = '[S]earch [Z]oxide' })
 
       vim.keymap.set('n', '<leader>sb', function()
         builtin.buffers { path_display = { 'smart', shorten = 2 } }

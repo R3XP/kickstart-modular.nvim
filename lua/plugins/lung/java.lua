@@ -1,0 +1,63 @@
+-- File: lua/plugins/lang/java.lua
+-- Purpose: Java LSP (jdtls), Treesitter, DAP + test support.
+-- All comments in English as requested.
+
+-- return {
+--   -- Treesitter: make sure Java grammar is available
+--   {
+--     'nvim-treesitter/nvim-treesitter',
+--     opts = function(_, opts)
+--       opts = opts or {}
+--       opts.ensure_installed = opts.ensure_installed or {}
+--       if type(opts.ensure_installed) == 'table' then
+--         table.insert(opts.ensure_installed, 'java')
+--         table.insert(opts.ensure_installed, 'xml')
+--         table.insert(opts.ensure_installed, 'json')
+--       end
+--       return opts
+--     end,
+--   },
+--
+--   -- Mason: ensure jdtls + debug/test adapters are present
+--   {
+--     'williamboman/mason.nvim',
+--     opts = {},
+--   },
+--   {
+--     'williamboman/mason-lspconfig.nvim',
+--     opts = function(_, opts)
+--       opts = opts or {}
+--       opts.ensure_installed = opts.ensure_installed or {}
+--       if type(opts.ensure_installed) == 'table' then
+--         table.insert(opts.ensure_installed, 'jdtls')
+--       end
+--       return opts
+--     end,
+--   },
+--
+--   -- Core LSP for Java (required)
+--   { 'neovim/nvim-lspconfig' },
+--
+--   -- Java sugar (code actions like organize imports, extract method, test codelens)
+--   { 'mfussenegger/nvim-jdtls' },
+--
+--   -- Debugging stack
+--   { 'mfussenegger/nvim-dap' },
+--   { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
+--
+--   -- Optional: test runner (VSCode Java Test bundles)
+--   { 'rcasia/neotest-java', dependencies = { 'nvim-neotest/neotest', 'mfussenegger/nvim-jdtls' }, opts = {} },
+--
+--   -- Formatter option: google-java-format via conform.nvim (if you use it)
+--   {
+--     'stevearc/conform.nvim',
+--     optional = true,
+--     opts = function(_, opts)
+--       opts = opts or {}
+--       opts.formatters_by_ft = opts.formatters_by_ft or {}
+--       -- jdtls can format, but if you prefer google-java-format uncomment:
+--       -- opts.formatters_by_ft.java = { "google-java-format" }
+--       return opts
+--     end,
+--   },
+-- }
